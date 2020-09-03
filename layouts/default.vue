@@ -41,7 +41,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar color="hyperfoca-light" flat app>
+    <v-app-bar color="hyperfoca-light" flat app hide-on-scroll>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="primary"></v-app-bar-nav-icon>
       <img src="/logo.svg" class="app-bar__img ma-auto" />
     </v-app-bar>
@@ -52,7 +52,7 @@
 
     <v-footer color="primary">
       <v-row align="center" no-gutters>
-        <v-col cols="12" lg="7" class="social__container">
+        <v-col cols="12" md="7" class="social__container">
           <p class="hyperfoca-light--text d-md-inline">Acompanhe nossas redes sociais:</p>
 
           <v-btn
@@ -67,7 +67,7 @@
           </v-btn>
         </v-col>
 
-        <v-col cols="12" lg="5">
+        <v-col cols="12" md="5">
           <v-row align="center" no-gutters>
             <p class="hyperfoca-light--text mt-10 mr-3 mt-md-0 mb-md-0">Assine nossa newsletter:</p>
 
@@ -131,6 +131,10 @@ export default {
 
 <style lang="scss">
 @import '~vuetify/src/styles/styles.sass';
+
+img {
+  max-width: 100%;
+}
 
 .main-menu {
   .title {
