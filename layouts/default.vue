@@ -13,7 +13,9 @@
       <v-list>
         <v-list-item class="d-inline-block">
           <v-list-item-content>
-            <v-btn color="primary" class="default-color">Entrar</v-btn>
+            <v-btn color="primary" class="default-color" href="/login">
+              Entrar
+            </v-btn>
           </v-list-item-content>
         </v-list-item>
         <v-list-item link>
@@ -45,15 +47,10 @@
     </v-app-bar>
 
     <v-main>
-      <v-container
-        class="fill-height"
-        fluid
-      >
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-main>
 
-    <v-footer color="primary" app>
+    <v-footer color="primary">
       <v-row align="center" no-gutters>
         <v-col cols="12" lg="7" class="social__container">
           <p class="hyperfoca-light--text d-md-inline">Acompanhe nossas redes sociais:</p>
