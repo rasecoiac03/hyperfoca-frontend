@@ -1,50 +1,47 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-      color="indigo lighten-5"
-    >
-      <v-list-item-title class="title" color="#003366">
+    <v-navigation-drawer v-model="drawer" color="main-menu hyperfoca-light" app>
+      <v-list-item-title class="title hyperfoca-dark--text">
+        <v-btn icon @click.stop="drawer = !drawer">
+          <v-icon color="primary" small>mdi-close</v-icon>
+        </v-btn>
         Menu
       </v-list-item-title>
-      <hr />
-      <v-list dense>
-        <v-list-item>
+
+      <v-divider dark />
+
+      <v-list>
+        <v-list-item class="d-inline-block">
           <v-list-item-content>
-            <v-btn small color="#E6E7F2" class="default-color">Entrar</v-btn>
+            <v-btn color="primary" class="default-color">Entrar</v-btn>
           </v-list-item-content>
         </v-list-item>
         <v-list-item link>
           <v-list-item-content>
-            <v-list-item-title>Fazer cadastro</v-list-item-title>
+            <v-list-item-title class="hyperfoca-dark--text font-weight-medium">Fazer cadastro</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item link>
           <v-list-item-content>
-            <v-list-item-title>Ir pra o Blog</v-list-item-title>
+            <v-list-item-title class="hyperfoca-dark--text font-weight-medium">Ir prao Blog</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item link>
           <v-list-item-content>
-            <v-list-item-title>Agendar Mentoria</v-list-item-title>
+            <v-list-item-title class="hyperfoca-dark--text font-weight-medium">Agendar Mentoria</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item link>
           <v-list-item-content>
-            <v-list-item-title>Quero Recrutar</v-list-item-title>
+            <v-list-item-title class="hyperfoca-dark--text font-weight-medium">Quero Recrutar</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar
-      app
-      color="indigo lighten-5"
-      dark
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="#003366"></v-app-bar-nav-icon>
-      <img src="/logo.svg" class="app-bar__img" />
+    <v-app-bar color="hyperfoca-light" flat app>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="primary"></v-app-bar-nav-icon>
+      <img src="/logo.svg" class="app-bar__img ma-auto" />
     </v-app-bar>
 
     <v-main>
@@ -55,53 +52,114 @@
         <nuxt />
       </v-container>
     </v-main>
-    <v-footer
-      color="#003366"
-      app
-    >
-      <h3 class="default-color">Acompanhe nossas redes sociais:</h3>
-      <h3 class="default-color">Assine nossa newsletter:</h3>
+
+    <v-footer color="primary" app>
+      <v-row align="center" no-gutters>
+        <v-col cols="12" lg="7" class="social__container">
+          <p class="hyperfoca-light--text d-md-inline">Acompanhe nossas redes sociais:</p>
+
+          <v-btn
+            v-for="item in socialMedia"
+            :key="item.text"
+            :href="item.url"
+            color="hyperfoca-light"
+            class="social__button"
+            text small>
+            <v-icon color="hyperfoca-light" left>mdi-{{ item.text }}</v-icon>
+            {{ item.text }}
+          </v-btn>
+        </v-col>
+
+        <v-col cols="12" lg="5">
+          <v-row align="center" no-gutters>
+            <p class="hyperfoca-light--text mt-10 mr-3 mt-md-0 mb-md-0">Assine nossa newsletter:</p>
+
+            <v-text-field
+              type="email"
+              label="Qual é o seu email?"
+              v-model="email"
+              hide-details
+              solo>
+              <template slot="append">
+                <v-btn @click="newsletter" color="info" depressed>
+                  Enviar
+                </v-btn>
+              </template>
+            </v-text-field>
+          </v-row>
+        </v-col>
+      </v-row>
     </v-footer>
   </v-app>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
-    }
-  }
+  props: {
+    source: String,
+  },
+
+  data: () => ({
+    drawer: null,
+    socialMedia: [
+      {
+        text: 'instagram',
+        url: '/',
+      },
+      {
+        text: 'facebook',
+        url: '/',
+      },
+      {
+        text: 'linkedin',
+        url: '/',
+      },
+    ],
+    email: '',
+  }),
+
+  mounted() {
+    this.$nextTick(() => {
+      this.drawer = false
+    })
+  },
+
+  methods: {
+    newsletter() {
+      console.log(this.email)
+    },
+  },
 }
 </script>
 
 <style lang="scss">
-.app-bar{
-  &__img {
-    display: block;
-    margin: 0 auto;
+@import '~vuetify/src/styles/styles.sass';
+
+.main-menu {
+  .title {
+    line-height: 63px !important;
   }
 }
 
-.default-color {
-  color: #E6E7F2;
+@media #{map-get($display-breakpoints, 'md-and-down')} {
+  .social {
+    &__container {
+      text-align: center;
+
+      .social__button {
+        &.v-btn.v-size--small {
+          height: auto;
+        }
+
+        .v-btn__content {
+          flex-direction: column;
+
+          i {
+            margin: 0 0 4px;
+          }
+        }
+      }
+    }
+  }
 }
 </style>
