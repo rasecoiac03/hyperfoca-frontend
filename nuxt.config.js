@@ -65,6 +65,7 @@ export default {
       themes: {
         light: {
           primary: '#003366',
+          info: '#73B9FF',
           'hyperfoca-dark': '#003366',
           'hyperfoca-light': '#E6E7F2',
         },

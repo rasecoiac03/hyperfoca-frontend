@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" color="hyperfoca-light" app>
+    <v-navigation-drawer v-model="drawer" color="main-menu hyperfoca-light" app>
       <v-list-item-title class="title hyperfoca-dark--text">
         <v-btn icon @click.stop="drawer = !drawer">
           <v-icon color="primary" small>mdi-close</v-icon>
@@ -39,7 +39,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar color="hyperfoca-light" app>
+    <v-app-bar color="hyperfoca-light" flat app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="primary"></v-app-bar-nav-icon>
       <img src="/logo.svg" class="app-bar__img ma-auto" />
     </v-app-bar>
@@ -72,7 +72,7 @@
 
         <v-col cols="12" lg="5">
           <v-row align="center" no-gutters>
-            <p class="hyperfoca-light--text mt-10 mr-3 mt-md-0 mb-0">Assine nossa newsletter:</p>
+            <p class="hyperfoca-light--text mt-10 mr-3 mt-md-0 mb-md-0">Assine nossa newsletter:</p>
 
             <v-text-field
               type="email"
@@ -81,7 +81,7 @@
               hide-details
               solo>
               <template slot="append">
-                <v-btn @click="newsletter" color="primary">
+                <v-btn @click="newsletter" color="info" depressed>
                   Enviar
                 </v-btn>
               </template>
@@ -134,6 +134,12 @@ export default {
 
 <style lang="scss">
 @import '~vuetify/src/styles/styles.sass';
+
+.main-menu {
+  .title {
+    line-height: 63px !important;
+  }
+}
 
 @media #{map-get($display-breakpoints, 'md-and-down')} {
   .social {
