@@ -53,7 +53,13 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
+
+  auth: {
+    // Options
+  },
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module

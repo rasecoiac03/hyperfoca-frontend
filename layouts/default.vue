@@ -32,6 +32,15 @@
       <nuxt-link to="/" class="ma-auto">
         <img src="/logo.svg" class="app-bar__img" />
       </nuxt-link>
+
+      <template v-if="user">
+        <v-btn color="primary" icon>
+          <v-icon>mdi-bell-outline</v-icon>
+        </v-btn>
+        <v-btn color="primary" to="/my-account" icon nuxt-link>
+          <v-icon>mdi-account-circle-outline</v-icon>
+        </v-btn>
+      </template>
     </v-app-bar>
 
     <v-main>
@@ -118,9 +127,21 @@ export default {
     email: '',
   }),
 
+  computed: {
+    user() {
+      return this.$auth.user
+    },
+  },
+
   mounted() {
     this.$nextTick(() => {
       this.drawer = false
+
+      // kill me
+      this.$auth.setUser({
+        image: 'https://api.adorable.io/avatars/285/abott@adorable.png',
+        name: 'Caio Cesar',
+      })
     })
   },
 
