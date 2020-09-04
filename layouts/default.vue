@@ -137,10 +137,9 @@ export default {
     this.$nextTick(() => {
       this.drawer = false
 
-      // kill me
       this.$auth.setUser({
         image: 'https://api.adorable.io/avatars/285/abott@adorable.png',
-        name: 'Caio Cesar',
+        name: 'José das Couves',
       })
     })
   },
