@@ -17,7 +17,7 @@
             trabalhando efetivamente.
           </p>
 
-          <v-btn color="primary" class="my-7">
+          <v-btn color="primary" class="my-7" to="/singup" nuxt-link>
             Crie sua conta
             <v-icon right>mdi-arrow-right</v-icon>
           </v-btn>
@@ -36,7 +36,7 @@
             Na hyperfoca vamos te selecionar por quem você realmente é e pelo que sabe fazer de verdade, não só pelo que você fala!
           </p>
 
-          <v-btn color="primary" class="my-7">
+          <v-btn color="primary" class="my-7" to="/singup" nuxt-link>
             Crie sua conta
             <v-icon right>mdi-arrow-right</v-icon>
           </v-btn>

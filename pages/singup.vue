@@ -71,7 +71,7 @@
             </v-col>
           </v-row>
 
-          <v-btn color="primary" class="d-block mt-5 mb-10 mx-auto" @click="singup">
+          <v-btn color="primary" class="d-block mt-5 mx-auto" @click="singup">
             Fazer cadastro
             <v-icon right>mdi-arrow-right</v-icon>
           </v-btn>

@@ -13,47 +13,35 @@
       <v-list>
         <v-list-item class="d-inline-block">
           <v-list-item-content>
-            <v-btn color="primary" class="default-color" href="/login">
+            <v-btn color="primary" class="default-color" to="/login" nuxt-link>
               Entrar
             </v-btn>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item v-for="(item, index) in menu" :key="index" :to="item.path" nuxt-link>
           <v-list-item-content>
-            <v-list-item-title class="hyperfoca-dark--text font-weight-medium">Fazer cadastro</v-list-item-title>
+            <v-list-item-title class="hyperfoca-dark--text font-weight-medium">{{ item.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link>
-          <v-list-item-content>
-            <v-list-item-title class="hyperfoca-dark--text font-weight-medium">Ir prao Blog</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link>
-          <v-list-item-content>
-            <v-list-item-title class="hyperfoca-dark--text font-weight-medium">Agendar Mentoria</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link>
-          <v-list-item-content>
-            <v-list-item-title class="hyperfoca-dark--text font-weight-medium">Quero Recrutar</v-list-item-title>
-          </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
     <v-app-bar color="hyperfoca-light" flat app hide-on-scroll>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="primary"></v-app-bar-nav-icon>
-      <img src="/logo.svg" class="app-bar__img ma-auto" />
+      <nuxt-link to="/" class="ma-auto">
+        <img src="/logo.svg" class="app-bar__img" />
+      </nuxt-link>
     </v-app-bar>
 
     <v-main>
       <nuxt />
     </v-main>
 
-    <v-footer color="primary">
+    <v-footer color="primary" class="mt-10">
       <v-row align="center" no-gutters>
         <v-col cols="12" md="7" class="social__container">
-          <p class="hyperfoca-light--text d-md-inline">Acompanhe nossas redes sociais:</p>
+          <p class="text-body-2 hyperfoca-light--text d-md-inline">Acompanhe nossas redes sociais:</p>
 
           <v-btn
             v-for="item in socialMedia"
@@ -69,7 +57,7 @@
 
         <v-col cols="12" md="5">
           <v-row align="center" no-gutters>
-            <p class="hyperfoca-light--text mt-10 mr-3 mt-md-0 mb-md-0">Assine nossa newsletter:</p>
+            <p class="text-body-2 hyperfoca-light--text mt-10 mr-3 mt-md-0 mb-md-0">Assine nossa newsletter:</p>
 
             <v-text-field
               type="email"
@@ -110,6 +98,21 @@ export default {
       {
         text: 'linkedin',
         url: '/',
+      },
+    ],
+    menu: [
+      {
+        path: '/singup',
+        text: 'Fazer cadastro',
+      },
+      {
+        text: 'Ir prao Blog',
+      },
+      {
+        text: 'Agendar Mentoria',
+      },
+      {
+        text: 'Quero Recrutar',
       },
     ],
     email: '',
