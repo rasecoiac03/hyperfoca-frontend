@@ -4,7 +4,7 @@
       <v-row align="center">
         <v-col cols="12" md="4" class="my-md-10">
           <img
-            src="/video-player.svg"
+            src="/home/video-player.svg"
             alt="A primeira plataforma online de seleção para Autistas"
             class="my-7 mx-auto d-block" />
         </v-col>
@@ -17,7 +17,7 @@
             trabalhando efetivamente.
           </p>
 
-          <v-btn color="primary my-7">
+          <v-btn color="primary" class="my-7">
             Crie sua conta
             <v-icon right>mdi-arrow-right</v-icon>
           </v-btn>
@@ -25,7 +25,7 @@
 
         <v-col cols="12" md="4">
           <img
-            src="/primeira-plataforma.svg"
+            src="/home/primeira-plataforma.svg"
             alt="Chega de entrevistas que mais parecem uma peça de teatro!"
             class="my-7 mx-auto d-block" />
         </v-col>
@@ -36,13 +36,20 @@
             Na hyperfoca vamos te selecionar por quem você realmente é e pelo que sabe fazer de verdade, não só pelo que você fala!
           </p>
 
-          <v-btn color="primary my-7">
+          <v-btn color="primary" class="my-7">
             Crie sua conta
             <v-icon right>mdi-arrow-right</v-icon>
           </v-btn>
         </v-col>
 
-        <v-col cols="12" md="8" class="mt-7 my-md-10 mx-md-auto">
+        <v-col cols="12" md="4">
+          <img
+            src="/home/feedbacks.svg"
+            alt="Quem já passou por aqui"
+            class="my-7 mx-auto d-block" />
+        </v-col>
+
+        <v-col cols="12" md="8" class="my-md-10">
           <h3 class="text-h4 text-md-h3 text-md-center font-medium mb-4">
             Quem já passou por aqui
           </h3>
