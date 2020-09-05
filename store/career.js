@@ -3,66 +3,55 @@ const state = () => ({
   job: [],
 })
 
+const getRandomInt = (min, max) => {
+  const minRnd = Math.ceil(min)
+  const maxRnd = Math.floor(max)
+  return Math.floor(Math.random() * (maxRnd - minRnd)) + minRnd
+}
+
+const defaultSteps = [
+  {
+    description: 'Currículo',
+    done: true,
+  },
+  {
+    description: 'Quiz Hyperfoca',
+    done: true,
+  },
+  {
+    description: 'Excel Básico',
+    current: true,
+    done: false,
+  },
+  {
+    description: 'Conversa com o Buddy',
+    done: false,
+  },
+  {
+    description: 'Experiência',
+    done: false,
+  },
+  {
+    description: 'Final',
+    done: false,
+  },
+]
+
 const actions = {
-  getJobs({ commit }) {
-    // FIXME
-    commit('setJobs', [
-      {
-        id: 1,
-        title: 'Auxiliar Admnistrativo',
-        company: 'Faculdade SuperAção',
-        location: 'Home Office - SP',
-        logo: 'https://logo.clearbit.com/baremetrics.com',
-        progress: 50,
-      },
-      {
-        id: 2,
-        title: 'Auxiliar Admnistrativo',
-        company: 'Faculdade SuperAção',
-        location: 'Home Office - SP',
-        logo: '',
-        progress: 20,
-      },
-    ])
+  async getJobs({ commit }) {
+    const { data: jobs } = await this.$axios.get('/jobs')
+    jobs.forEach(j => {
+      const progress = getRandomInt(0, 100)
+      Object.assign(j, { progress })
+    })
+    commit('setJobs', jobs)
   },
 
-  getJobById({ commit }, { id }) {
-    // FIXME
-    commit('setJob', {
-      id,
-      title: 'Auxiliar Admnistrativo',
-      company: 'Faculdade SuperAção',
-      location: 'Home Office - SP',
-      logo: 'https://logo.clearbit.com/baremetrics.com',
-      progress: 50,
-      steps: [
-        {
-          description: 'Currículo',
-          done: true,
-        },
-        {
-          description: 'Quiz Hyperfoca',
-          done: true,
-        },
-        {
-          description: 'Excel Básico',
-          current: true,
-          done: false,
-        },
-        {
-          description: 'Conversa com o Buddy',
-          done: false,
-        },
-        {
-          description: 'Experiência',
-          done: false,
-        },
-        {
-          description: 'Final',
-          done: false,
-        },
-      ],
-    })
+  async getJobById({ commit }, { id }) {
+    const { data: job } = await this.$axios.get(`/jobs/${id}`)
+    const progress = getRandomInt(0, 100)
+    Object.assign(job, { steps: defaultSteps, progress })
+    commit('setJob', job)
   },
 }
 
