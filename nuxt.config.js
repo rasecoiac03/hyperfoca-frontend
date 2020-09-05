@@ -53,13 +53,13 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/auth'
+    '@nuxtjs/axios'
   ],
 
-  auth: {
-    // Options
+  axios: {
+    baseURL: 'https://hyperfoca-backend.herokuapp.com'
   },
+
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module

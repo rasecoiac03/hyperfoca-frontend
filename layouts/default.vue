@@ -11,13 +11,30 @@
       <v-divider dark />
 
       <v-list>
-        <v-list-item class="d-inline-block">
-          <v-list-item-content>
-            <v-btn color="primary" class="default-color" to="/login" nuxt-link>
-              Entrar
-            </v-btn>
-          </v-list-item-content>
-        </v-list-item>
+        <template v-if="!user">
+          <v-list-item class="d-inline-block">
+            <v-list-item-content>
+              <v-btn color="primary" class="default-color" to="/login" nuxt-link>
+                Entrar
+              </v-btn>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item to="/singup">
+            <v-list-item-content>
+              <v-list-item-title class="hyperfoca-dark--text font-weight-medium">Fazer cadastro</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+        <template v-else>
+          <v-list-item class="d-inline-block">
+            <v-list-item-content>
+              <v-btn color="primary" class="default-color" @click="logout">
+                Sair
+              </v-btn>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+
         <v-list-item v-for="(item, index) in menu" :key="index" :to="item.path" nuxt-link>
           <v-list-item-content>
             <v-list-item-title class="hyperfoca-dark--text font-weight-medium">{{ item.text }}</v-list-item-title>
@@ -88,6 +105,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   props: {
     source: String,
@@ -111,11 +130,7 @@ export default {
     ],
     menu: [
       {
-        path: '/singup',
-        text: 'Fazer cadastro',
-      },
-      {
-        text: 'Ir prao Blog',
+        text: 'Ir para o Blog',
       },
       {
         text: 'Agendar Mentoria',
@@ -128,25 +143,25 @@ export default {
   }),
 
   computed: {
-    user() {
-      return this.$auth.user
-    },
+    ...mapState({
+      user: state => state.auth.user,
+    }),
   },
 
   mounted() {
     this.$nextTick(() => {
       this.drawer = false
-
-      this.$auth.setUser({
-        image: 'https://api.adorable.io/avatars/285/abott@adorable.png',
-        name: 'José das Couves',
-      })
     })
   },
 
   methods: {
     newsletter() {
       console.log(this.email)
+    },
+
+    logout() {
+      this.$store.dispatch('auth/logout')
+      this.$router.push('/')
     },
   },
 }

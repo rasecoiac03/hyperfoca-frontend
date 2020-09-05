@@ -69,6 +69,15 @@
                 </template>
               </v-checkbox>
             </v-col>
+
+            <v-col cols="12" class="py-0">
+              <v-alert :type="alert.type" v-if="alert">
+                {{alert.message}}
+                <nuxt-link to="/login" class="white--text" v-if="alert.login">
+                  Entrar
+                </nuxt-link>
+              </v-alert>
+            </v-col>
           </v-row>
 
           <v-btn color="primary" class="d-block mt-5 mx-auto" @click="singup">
@@ -119,6 +128,7 @@ export default {
       acceptedTerms: [required('É preciso aceitar os Termos')],
       acceptedPrivacy: [required('É preciso aceitar a Política')],
     },
+    alert: null,
   }),
 
   computed: {
@@ -129,8 +139,22 @@ export default {
   },
 
   methods: {
-    singup() {
-      this.$refs.form.validate()
+    async singup() {
+      if (this.$refs.form.validate()) {
+        try {
+          const message = await this.$store.dispatch('auth/singup', this.user)
+          this.alert = {
+            type: 'success',
+            message,
+            login: true,
+          }
+        } catch (message) {
+          this.alert = {
+            type: 'error',
+            message,
+          }
+        }
+      }
     },
   },
 

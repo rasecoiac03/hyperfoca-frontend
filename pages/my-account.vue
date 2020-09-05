@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <header class="text-center my-10">
+    <header class="text-center my-10" v-if="user">
       <v-avatar size="112" class="mb-10 mx-auto" color="hyperfoca-light">
         <img
           :src="user.image"
@@ -34,9 +34,9 @@
 </template>
 
 <script>
-export default {
-  middleware: 'auth',
+import { mapState } from 'vuex'
 
+export default {
   data: () => ({
     menu: [
       {
@@ -73,13 +73,19 @@ export default {
   }),
 
   computed: {
-    user() {
-      return this.$auth.user
-    },
+    ...mapState({
+      user: state => state.auth.user,
+    }),
 
-    userInitials() {
+    userInitials () {
       return this.user.name.split(' ').map(([initial])=> initial).join('')
     },
+  },
+
+  mounted() {
+    if (!this.user) {
+      this.$router.push('/login')
+    }
   },
 }
 </script>

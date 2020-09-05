@@ -27,6 +27,12 @@
                 placeholder="Insira sua senha"
                 outlined />
             </v-col>
+
+            <v-col cols="12" class="py-0">
+              <v-alert type="error" v-if="error">
+                {{error}}
+              </v-alert>
+            </v-col>
           </v-row>
 
           <v-btn color="primary" class="d-block mt-5 mb-10 mx-auto" @click="login">
@@ -64,11 +70,25 @@ export default {
         required('Por favor, informe a senha'),
       ],
     },
+    error: false,
   }),
 
+  mounted() {
+    if (this.$userId) {
+      this.$router.push('/my-account')
+    }
+  },
+
   methods: {
-    login() {
-      this.$refs.form.validate()
+    async login() {
+      if (this.$refs.form.validate()) {
+        try {
+          await this.$store.dispatch('auth/login', this.user, this.$axios)
+          this.$router.push('/my-account')
+        } catch(err) {
+          this.error = err
+        }
+      }
     },
   },
 
