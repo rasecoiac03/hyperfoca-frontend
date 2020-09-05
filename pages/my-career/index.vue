@@ -49,8 +49,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  middleware: 'auth',
-
   async fetch() {
     await this.$store.dispatch('career/getJobs')
   },
@@ -58,7 +56,14 @@ export default {
   computed: {
     ...mapState({
       jobs: state => state.career.jobs,
+      user: state => state.auth.user,
     }),
+  },
+
+  mounted() {
+    if (!this.user) {
+      this.$router.push('/login')
+    }
   },
 
   methods: {
