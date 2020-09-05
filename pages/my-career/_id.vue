@@ -72,6 +72,8 @@ export default {
     }),
 
     evolution() {
+      if (!this.job.steps) return null
+
       const { steps, steps: { length } } = this.job
       const current = (steps.findIndex(item => item.current)) + 1
 
