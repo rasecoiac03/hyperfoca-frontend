@@ -22,7 +22,7 @@
         lg="4"
         v-for="(item, index) in menu"
         :key="index">
-        <v-card height="100%">
+        <v-card :to="item.path" height="100%" nuxt>
           <v-card-text class="text-h6 text-center font-weight-bold primary--text">
             <img class="d-block mb-3 mx-auto" :src="item.icon" v-if="item.icon" />
             {{ item.text }}
@@ -41,7 +41,7 @@ export default {
     menu: [
       {
         icon: '/my-account/vagas.svg',
-        path: '/',
+        path: '/my-career',
         text: 'Minhas Vagas',
       },
       {
